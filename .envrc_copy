@@ -1,0 +1,2 @@
+export PORT=8000
+export DSN="root@tcp(127.0.0.1:3306)/fishing_place?parseTime=true"
