@@ -2,7 +2,6 @@ package main
 
 import (
 	"log"
-	"net/http"
 	"os"
 
 	"go_rest_api/handler"
@@ -12,6 +11,7 @@ import (
 	"github.com/jmoiron/sqlx"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
+	echoSwagger "github.com/swaggo/echo-swagger"
 )
 
 var e = createMux()
@@ -21,9 +21,7 @@ func main() {
 	db := connectDB()
 	repository.SetDB(db)
 
-	e.GET("/", func(c echo.Context) error {
-		return c.String(http.StatusOK, "Hello, hoge!")
-	})
+	e.GET("/swagger/*", echoSwagger.WrapHandler)
 	e.GET("/places", handler.PlaceIndex)
 
 	e.Logger.Fatal(e.Start(":" + port))
