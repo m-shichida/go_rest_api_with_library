@@ -1,3 +1,8 @@
+golang 勉強用 REST API サーバー
+
+- echo
+- sqlx
+
 ## migration
 
 used golang-migrate.

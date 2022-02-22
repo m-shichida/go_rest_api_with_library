@@ -1,7 +1,7 @@
 package repository
 
 import (
-	"go_json_api/model"
+	"go_rest_api/model"
 )
 
 func PlaceList() ([]*model.Place, error) {

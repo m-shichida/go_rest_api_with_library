@@ -5,8 +5,8 @@ import (
 	"net/http"
 	"os"
 
-	"go_json_api/handler"
-	"go_json_api/repository"
+	"go_rest_api/handler"
+	"go_rest_api/repository"
 
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jmoiron/sqlx"
