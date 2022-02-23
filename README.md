@@ -24,3 +24,12 @@ migrate -database $DATABASE_URL -path db/migrations up
 ```
 migrate -database $DATABASE_URL -path db/migrations down
 ```
+
+## swagger
+
+swagger の作成
+[このリンクに従い記入](https://github.com/swaggo/swag#api-operation)
+
+```go
+swag init --outputTypes go
+```

@@ -4,6 +4,7 @@ import (
 	"log"
 	"os"
 
+	_ "go_rest_api/docs"
 	"go_rest_api/handler"
 	"go_rest_api/repository"
 
@@ -16,6 +17,9 @@ import (
 
 var e = createMux()
 
+// @title GO_REST_API
+// @version 0.1
+// @description Go 言語で作成する REST API
 func main() {
 	port := os.Getenv("PORT")
 	db := connectDB()
