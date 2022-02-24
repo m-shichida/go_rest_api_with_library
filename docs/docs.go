@@ -16,9 +16,9 @@ const docTemplate_swagger = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/places": {
+        "/fishes": {
             "get": {
-                "description": "釣り場の一覧を返す",
+                "description": "魚の一覧を返す",
                 "consumes": [
                     "application/json"
                 ],
@@ -26,14 +26,14 @@ const docTemplate_swagger = `{
                     "application/json"
                 ],
                 "tags": [
-                    "places"
+                    "fishes"
                 ],
-                "summary": "釣り場の一覧を返す",
+                "summary": "魚の一覧を返す",
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/model.Place"
+                            "$ref": "#/definitions/model.Fish"
                         }
                     }
                 }
@@ -41,11 +41,11 @@ const docTemplate_swagger = `{
         }
     },
     "definitions": {
-        "model.Place": {
+        "model.Fish": {
             "type": "object",
             "properties": {
-                "address": {
-                    "type": "string"
+                "classification": {
+                    "type": "integer"
                 },
                 "created_at": {
                     "type": "string"

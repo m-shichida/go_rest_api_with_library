@@ -26,7 +26,7 @@ func main() {
 	repository.SetDB(db)
 
 	e.GET("/swagger/*", echoSwagger.WrapHandler)
-	e.GET("/places", handler.PlaceIndex)
+	e.GET("/fishes", handler.FishIndex)
 
 	e.Logger.Fatal(e.Start(":" + port))
 }
