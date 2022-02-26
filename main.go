@@ -28,6 +28,7 @@ func main() {
 	e.GET("/swagger/*", echoSwagger.WrapHandler)
 	e.GET("/fishes", handler.FishIndex)
 	e.POST("/fishes", handler.FishCreate)
+	e.GET("/fishes/:id", handler.FishShow)
 
 	e.Logger.Fatal(e.Start(":" + port))
 }

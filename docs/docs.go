@@ -28,7 +28,7 @@ const docTemplate_swagger = `{
                 "tags": [
                     "fishes"
                 ],
-                "summary": "魚の一覧を返す",
+                "summary": "index",
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -49,7 +49,7 @@ const docTemplate_swagger = `{
                 "tags": [
                     "fishes"
                 ],
-                "summary": "魚の追加",
+                "summary": "create",
                 "parameters": [
                     {
                         "description": "全ての必須項目",
@@ -66,6 +66,50 @@ const docTemplate_swagger = `{
                         "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/model.Fish"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/fishes/{id}": {
+            "get": {
+                "description": "魚の詳細を返す",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "fishes"
+                ],
+                "summary": "show",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "fish ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.Fish"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "string"
                         }
                     },
                     "500": {

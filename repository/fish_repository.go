@@ -33,3 +33,15 @@ func FishCreate(fish *model.Fish) (sql.Result, error) {
 
 	return result, nil
 }
+
+func FishGetById(id int) (*model.Fish, error) {
+	query := `SELECT * FROM fishes WHERE id = ?;`
+
+	var fish model.Fish
+
+	if err := db.Get(&fish, query, id); err != nil {
+		return nil, err
+	}
+
+	return &fish, nil
+}
