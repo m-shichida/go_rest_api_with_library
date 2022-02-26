@@ -37,6 +37,44 @@ const docTemplate_swagger = `{
                         }
                     }
                 }
+            },
+            "post": {
+                "description": "魚を追加し、追加後の魚を返す",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "fishes"
+                ],
+                "summary": "魚の追加",
+                "parameters": [
+                    {
+                        "description": "全ての必須項目",
+                        "name": "fish_parameter",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.PostFish"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.Fish"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
             }
         }
     },
@@ -63,6 +101,20 @@ const docTemplate_swagger = `{
                     "type": "string"
                 }
             }
+        },
+        "model.PostFish": {
+            "type": "object",
+            "properties": {
+                "classification": {
+                    "type": "integer"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
         }
     }
 }`
@@ -74,7 +126,7 @@ var SwaggerInfo_swagger = &swag.Spec{
 	BasePath:         "",
 	Schemes:          []string{},
 	Title:            "GO_REST_API",
-	Description:      "Go 言語で作成する REST API",
+	Description:      "Go REST API",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate_swagger,
 }

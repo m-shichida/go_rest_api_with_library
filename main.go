@@ -19,7 +19,7 @@ var e = createMux()
 
 // @title GO_REST_API
 // @version 0.1
-// @description Go 言語で作成する REST API
+// @description Go REST API
 func main() {
 	port := os.Getenv("PORT")
 	db := connectDB()
@@ -27,6 +27,7 @@ func main() {
 
 	e.GET("/swagger/*", echoSwagger.WrapHandler)
 	e.GET("/fishes", handler.FishIndex)
+	e.POST("/fishes", handler.FishCreate)
 
 	e.Logger.Fatal(e.Start(":" + port))
 }
@@ -37,7 +38,6 @@ func createMux() *echo.Echo {
 	e.Use(middleware.Recover())
 	e.Use(middleware.Logger())
 	e.Use(middleware.Gzip())
-	e.Use(middleware.CSRF())
 
 	return e
 }

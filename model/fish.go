@@ -12,3 +12,10 @@ type Fish struct {
 	CreatedAt time.Time `db:"created_at" json:"created_at"`
 	UpdatedAt time.Time `db:"updated_at" json:"updated_at"`
 }
+
+// swagger 用。POST するときのリクエストボディの指定がわからん
+type PostFish struct {
+	Name string
+	Classification int8
+	Description string
+}
