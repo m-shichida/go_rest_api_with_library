@@ -45,3 +45,24 @@ func FishGetById(id int) (*model.Fish, error) {
 
 	return &fish, nil
 }
+
+func FishUpdate(fish *model.Fish) (sql.Result, error) {
+	updateQuery :=
+		`UPDATE fishes
+		    SET name = :name,
+				    classification = :classification,
+						description = :description
+			WHERE id = :id`
+
+	tx := db.MustBegin()
+	res, err := tx.NamedExec(updateQuery, &fish);
+	if err != nil {
+		tx.Rollback()
+
+		return res, err
+	}
+
+	tx.Commit()
+
+	return res, nil
+}

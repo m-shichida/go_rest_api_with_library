@@ -52,12 +52,12 @@ const docTemplate_swagger = `{
                 "summary": "create",
                 "parameters": [
                     {
-                        "description": "全ての必須項目",
+                        "description": "全て必須項目",
                         "name": "fish_parameter",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/model.PostFish"
+                            "$ref": "#/definitions/model.FishParameter"
                         }
                     }
                 ],
@@ -119,6 +119,57 @@ const docTemplate_swagger = `{
                         }
                     }
                 }
+            },
+            "patch": {
+                "description": "魚の情報を更新する",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "fishes"
+                ],
+                "summary": "update",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "fish ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "全て必須項目",
+                        "name": "fish_parameter",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.FishParameter"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.Fish"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
             }
         }
     },
@@ -146,7 +197,7 @@ const docTemplate_swagger = `{
                 }
             }
         },
-        "model.PostFish": {
+        "model.FishParameter": {
             "type": "object",
             "properties": {
                 "classification": {

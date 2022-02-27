@@ -5,7 +5,7 @@ import (
 )
 
 type Fish struct {
-	ID int `db:"id" json:"id"`
+	Id int `db:"id" json:"id"`
 	Name string `db:"name" json:"name"`
 	Classification int8 `db:"classification" json:"classification"`
 	Description string `db:"description" json:"description"`
@@ -13,8 +13,8 @@ type Fish struct {
 	UpdatedAt time.Time `db:"updated_at" json:"updated_at"`
 }
 
-// swagger 用。POST するときのリクエストボディの指定がわからん
-type PostFish struct {
+// swagger 用。POST, PATCH するときのリクエストボディの指定がわからん
+type FishParameter struct {
 	Name string
 	Classification int8
 	Description string

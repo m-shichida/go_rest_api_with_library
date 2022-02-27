@@ -29,6 +29,7 @@ func main() {
 	e.GET("/fishes", handler.FishIndex)
 	e.POST("/fishes", handler.FishCreate)
 	e.GET("/fishes/:id", handler.FishShow)
+	e.PATCH("/fishes/:id", handler.FishUpdate)
 
 	e.Logger.Fatal(e.Start(":" + port))
 }
