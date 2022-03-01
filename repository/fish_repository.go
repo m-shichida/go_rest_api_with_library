@@ -66,3 +66,19 @@ func FishUpdate(fish *model.Fish) (sql.Result, error) {
 
 	return res, nil
 }
+
+func FishDestroy(id int) (sql.Result, error) {
+	query := `DELETE FROM fishes where id = ?`
+
+	tx := db.MustBegin()
+	res, err := tx.Exec(query, id);
+	if err != nil {
+		tx.Rollback()
+
+		return res, err
+	}
+
+	tx.Commit()
+
+	return res, nil
+}

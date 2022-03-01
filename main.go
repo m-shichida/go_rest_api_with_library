@@ -30,6 +30,7 @@ func main() {
 	e.POST("/fishes", handler.FishCreate)
 	e.GET("/fishes/:id", handler.FishShow)
 	e.PATCH("/fishes/:id", handler.FishUpdate)
+	e.DELETE("/fishes/:id", handler.FishDestroy)
 
 	e.Logger.Fatal(e.Start(":" + port))
 }

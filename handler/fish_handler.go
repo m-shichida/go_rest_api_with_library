@@ -117,3 +117,25 @@ func FishUpdate(c echo.Context) error {
 
 	return c.JSON(http.StatusOK, fish)
 }
+
+// @Summary      delete
+// @Description  魚の情報を削除する
+// @tags         fishes
+// @Accept       json
+// @Produce      json
+// @Success      200 {string} string
+// @Success      404 {string} string
+// @failure      500 {string} string
+// @Router       /fishes/{id} [delete]
+// @Param        id path int true "fish ID"
+func FishDestroy(c echo.Context) error {
+	id, _ := strconv.Atoi(c.Param("id"))
+	_, err := repository.FishDestroy(id)
+
+	if err != nil {
+		c.Logger().Error(err.Error())
+		return c.JSON(http.StatusInternalServerError, err)
+	}
+
+	return c.JSON(http.StatusOK, "削除しました")
+}

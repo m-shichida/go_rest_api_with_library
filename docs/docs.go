@@ -18,7 +18,7 @@ const docTemplate_swagger = `{
     "paths": {
         "/fishes": {
             "get": {
-                "description": "魚の一覧を返す",
+                "description": "魚の情報の一覧を返す",
                 "consumes": [
                     "application/json"
                 ],
@@ -39,7 +39,7 @@ const docTemplate_swagger = `{
                 }
             },
             "post": {
-                "description": "魚を追加し、追加後の魚を返す",
+                "description": "魚の情報を追加し、追加後の魚を返す",
                 "consumes": [
                     "application/json"
                 ],
@@ -104,6 +104,48 @@ const docTemplate_swagger = `{
                         "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/model.Fish"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "魚の情報を削除する",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "fishes"
+                ],
+                "summary": "delete",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "fish ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "string"
                         }
                     },
                     "404": {
