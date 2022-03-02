@@ -8,6 +8,7 @@ import (
 	"go_rest_api/handler"
 	"go_rest_api/repository"
 
+	"github.com/go-playground/validator/v10"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jmoiron/sqlx"
 	"github.com/labstack/echo/v4"
@@ -31,6 +32,9 @@ func main() {
 	e.GET("/fishes/:id", handler.FishShow)
 	e.PATCH("/fishes/:id", handler.FishUpdate)
 	e.DELETE("/fishes/:id", handler.FishDestroy)
+
+	// Validate メソッドを使えるようにする
+	e.Validator = &CustomValidator{validator: validator.New()}
 
 	e.Logger.Fatal(e.Start(":" + port))
 }
@@ -58,4 +62,13 @@ func connectDB() *sqlx.DB {
 	log.Println("db connection succeeded")
 
 	return db
+}
+
+type CustomValidator struct {
+	validator *validator.Validate
+}
+
+// 自作の Validate メソッドを用意、その中で validator ライブラリを使用する
+func (cv *CustomValidator) Validate(i interface{}) error {
+  return cv.validator.Struct(i)
 }

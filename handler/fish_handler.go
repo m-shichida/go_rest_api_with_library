@@ -39,7 +39,7 @@ func FishIndex(c echo.Context) error {
 // @Router       /fishes [post]
 // @Param        fish_parameter body model.FishParameter true "全て必須項目"
 func FishCreate(c echo.Context) error {
-	var fish *model.Fish
+	var fish model.Fish
 
 	if err := c.Bind(&fish); err != nil {
 		c.Logger().Error(err.Error())
@@ -47,7 +47,16 @@ func FishCreate(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, err)
 	}
 
-	result, err := repository.FishCreate(fish)
+	// main.go で定義した Validate の結果が返ってくる
+	if err := c.Validate(&fish); err != nil {
+		c.Logger().Error(err.Error())
+
+		messages := fish.ValidationMessages(err)
+
+		return c.JSON(http.StatusBadRequest, messages)
+	}
+
+	result, err := repository.FishCreate(&fish)
 	if err != nil {
 		c.Logger().Error(err.Error())
 
@@ -106,6 +115,15 @@ func FishUpdate(c echo.Context) error {
 		c.Logger().Error(err.Error())
 
 		return c.JSON(http.StatusBadRequest, err)
+	}
+
+	// main.go で定義した Validate の結果が返ってくる
+	if err := c.Validate(&fish); err != nil {
+		c.Logger().Error(err.Error())
+
+		messages := fish.ValidationMessages(err)
+
+		return c.JSON(http.StatusBadRequest, messages)
 	}
 
 	_, err := repository.FishUpdate(&fish)
