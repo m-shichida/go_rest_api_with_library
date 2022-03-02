@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"database/sql"
 	"net/http"
 	"strconv"
 
@@ -88,7 +89,12 @@ func FishShow(c echo.Context) error {
 
 	if err != nil {
 		c.Logger().Error(err.Error())
-		return c.JSON(http.StatusInternalServerError, err)
+
+		if err == sql.ErrNoRows {
+			return c.JSON(http.StatusNotFound, "レコードが見つかりませんでした")
+		} else {
+			return c.JSON(http.StatusInternalServerError, err)
+		}
 	}
 
 	return c.JSON(http.StatusOK, fish)
@@ -142,7 +148,6 @@ func FishUpdate(c echo.Context) error {
 // @Accept       json
 // @Produce      json
 // @Success      200 {string} string
-// @Success      404 {string} string
 // @failure      500 {string} string
 // @Router       /fishes/{id} [delete]
 // @Param        id path int true "fish ID"
@@ -152,6 +157,7 @@ func FishDestroy(c echo.Context) error {
 
 	if err != nil {
 		c.Logger().Error(err.Error())
+
 		return c.JSON(http.StatusInternalServerError, err)
 	}
 
