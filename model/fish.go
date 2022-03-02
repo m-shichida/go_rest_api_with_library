@@ -9,7 +9,7 @@ import (
 type Fish struct {
 	Id int `db:"id" json:"id"`
 	Name string `db:"name" json:"name" validate:"required,max=100"`
-	Classification int8 `db:"classification" json:"classification" validate:"required,gte=0,lte=2"`
+	Classification int8 `db:"classification" json:"classification" validate:"gte=0,lte=2"`
 	Description string `db:"description" json:"description" validate:"required"`
 	CreatedAt time.Time `db:"created_at" json:"created_at"`
 	UpdatedAt time.Time `db:"updated_at" json:"updated_at"`
@@ -36,8 +36,6 @@ func (fish *Fish) ValidationMessages(err error) []string {
 				}
 			case "Classification":
 				switch (err.Tag()) {
-					case "required":
-						messages = append(messages, "分類は必須項目です")
 					case "lte":
 						messages = append(messages, "分類は0から2の数値を指定してください")
 					case "gte":
