@@ -25,6 +25,7 @@ type FishParameter struct {
 func (fish *Fish) ValidationMessages(err error) []string {
 	var messages []string
 
+	// validator の ValidationErrors という型の値だけ抽出している
 	for _, err := range err.(validator.ValidationErrors) {
 		switch (err.Field()) {
 			case "Name":

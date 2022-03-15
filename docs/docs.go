@@ -29,6 +29,14 @@ const docTemplate_swagger = `{
                     "fishes"
                 ],
                 "summary": "index",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "魚の名前",
+                        "name": "name",
+                        "in": "query"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -148,12 +156,6 @@ const docTemplate_swagger = `{
                             "type": "string"
                         }
                     },
-                    "404": {
-                        "description": "Not Found",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
@@ -218,9 +220,15 @@ const docTemplate_swagger = `{
     "definitions": {
         "model.Fish": {
             "type": "object",
+            "required": [
+                "description",
+                "name"
+            ],
             "properties": {
                 "classification": {
-                    "type": "integer"
+                    "type": "integer",
+                    "maximum": 2,
+                    "minimum": 0
                 },
                 "created_at": {
                     "type": "string"
@@ -232,7 +240,8 @@ const docTemplate_swagger = `{
                     "type": "integer"
                 },
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "maxLength": 100
                 },
                 "updated_at": {
                     "type": "string"

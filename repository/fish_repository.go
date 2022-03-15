@@ -5,11 +5,11 @@ import (
 	"go_rest_api/model"
 )
 
-func FishList() ([]*model.Fish, error) {
-	query := `SELECT * FROM fishes;`
+func FishList(name string) ([]*model.Fish, error) {
+	query := `SELECT * FROM fishes WHERE name LIKE ?;`
 
 	var fishes []*model.Fish
-	if err := db.Select(&fishes, query); err != nil {
+	if err := db.Select(&fishes, query, "%" + name + "%"); err != nil {
 		return nil, err
 	}
 

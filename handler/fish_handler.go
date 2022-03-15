@@ -19,8 +19,10 @@ import (
 // @Produce      json
 // @Success      200  {object}  model.Fish
 // @Router       /fishes [get]
+// @Param        name query string false "魚の名前"
 func FishIndex(c echo.Context) error {
-	fishes, err := repository.FishList()
+	name := c.QueryParam("name")
+	fishes, err := repository.FishList(name)
 
 	if err != nil {
 		c.Logger().Error(err.Error())
